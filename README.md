@@ -10,19 +10,19 @@
 Using npm:
 
 ```bash
-$ npm install https://github.com/dedesundara/rollup-obfuscate-ts
+$ npm install -D https://github.com/dedesundara/rollup-obfuscate-ts
 ```
 
 Using yarn:
 
 ```bash
-$ yarn add https://github.com/dedesundara/rollup-obfuscate-ts
+$ yarn add -D https://github.com/dedesundara/rollup-obfuscate-ts
 ```
 
 Using pnpm:
 
 ```bash
-$ pnpm add https://github.com/dedesundara/rollup-obfuscate-ts
+$ pnpm add -D https://github.com/dedesundara/rollup-obfuscate-ts
 ```
 
 # Use
@@ -56,3 +56,5 @@ You can also pass in the following additional options:
 - `include` - A [FilterPattern](https://github.com/rollup/plugins/blob/master/packages/pluginutils/types/index.d.ts#L23) of files to include. By default only allows js/ts files - only works with global set to false
 
 - `exclude` - A [FilterPattern](https://github.com/rollup/plugins/blob/master/packages/pluginutils/types/index.d.ts#L23) of files to exclude. By default ignores node_modules - only works with global set to false
+
+- `allowedFile` - A function allowed file, allowedFile?: (filename: string) => boolean

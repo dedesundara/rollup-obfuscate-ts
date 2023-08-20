@@ -8,6 +8,7 @@ export interface ObfuscatorPluginOptions extends ObfuscatorOptions {
     global?: boolean;
     include?: FilterPattern;
     exclude?: FilterPattern;
+    allowedFile?: (filename: string) => boolean;
 }
 
 export function obfuscate(
@@ -45,17 +46,21 @@ export function obfuscate(
 
         renderChunk: options.global
             ? (code, { fileName }) => {
-                  const obfuscated = Obfuscator.obfuscate(code, {
-                      ...options,
-                      inputFileName: fileName,
-                  });
-
-                  return {
-                      code: obfuscated.getObfuscatedCode(),
-                      map: options.sourceMap
-                          ? obfuscated.getSourceMap()
-                          : undefined,
-                  };
+                if(options.allowedFile && options.allowedFile(fileName)){
+                    const obfuscated = Obfuscator.obfuscate(code, {
+                        ...options,
+                        inputFileName: fileName,
+                    });
+  
+                    return {
+                        code: obfuscated.getObfuscatedCode(),
+                        map: options.sourceMap
+                            ? obfuscated.getSourceMap()
+                            : undefined,
+                    };
+                } else {
+                    return
+                }
               }
             : undefined,
     };
